@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MamaActivity">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="280dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker">
+
+        <RadioButton
+            android:id="@+id/seioBtn"
+            android:layout_width="123dp"
+            android:layout_height="34dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_radio_button_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Seio"
+            android:textColor="@drawable/custom_radio_button_text_color_selector"
+            android:textStyle="bold" />
+
+
+        <RadioButton
+            android:id="@+id/mamadeiraBtn"
+            android:layout_width="123dp"
+            android:layout_height="34dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_radio_button_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Mamadeira"
+            android:textColor="@drawable/custom_radio_button_text_color_selector"
+            android:textStyle="bold" />
+    </RadioGroup>
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="280dp"
+        android:layout_height="360dp"
+        android:layout_below="@id/radioGroup"
+        android:headerBackground="@color/purple_200"
+        android:numbersBackgroundColor="#E0DFDF"
+        android:numbersSelectorColor="@color/purple_200"
+        android:numbersTextColor="#191818"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/mamandeiraNumberLayout"
+        android:layout_width="150dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.559"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+        <NumberPicker
+            android:id="@+id/hundredsMlPicker"
+            android:layout_width="20dp"
+            android:layout_height="74dp"
+            android:layout_marginHorizontal="10dp" />
+
+        <NumberPicker
+            android:id="@+id/tensMlPicker"
+            android:layout_width="20dp"
+            android:layout_height="74dp"
+            android:layout_marginHorizontal="10dp" />
+
+        <NumberPicker
+            android:id="@+id/mlPicker"
+            android:layout_width="20dp"
+            android:layout_height="74dp"
+            android:layout_marginHorizontal="10dp" />
+
+        <TextView
+            android:id="@+id/mlText"
+            android:layout_width="19dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            android:text="ml"
+            tools:layout_editor_absoluteX="263dp"
+            tools:layout_editor_absoluteY="498dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/seioNumberLayout"
+        android:layout_width="133dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.582"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+        <NumberPicker
+            android:id="@+id/tensMinutePicker"
+            android:layout_width="20dp"
+            android:layout_height="74dp"
+            android:layout_marginHorizontal="10dp" />
+
+        <NumberPicker
+            android:id="@+id/minutePicker"
+            android:layout_width="20dp"
+            android:layout_height="74dp"
+            android:layout_marginHorizontal="10dp" />
+
+        <TextView
+            android:id="@+id/minuteText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            android:text="minutos"
+            tools:layout_editor_absoluteX="263dp"
+            tools:layout_editor_absoluteY="498dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/salvarBtn"
+        android:layout_width="294dp"
+        android:layout_height="51dp"
+        android:layout_below="@id/radioGroup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:text="@string/salvar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

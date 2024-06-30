@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Baby App</string>
+    <string name="resumo">Resumo</string>
+    <string name="fralda">Fralda</string>
+    <string name="mama">Mamá</string>
+    <string name="coco">Cocô</string>
+    <string name="xixi">Xixi</string>
+    <string name="ambos">Ambos</string>
+    <string name="salvar">Salvar</string>
+</resources>
