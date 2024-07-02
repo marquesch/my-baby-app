@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FraldaActivity">
+    tools:context=".DiaperActivity">
 
     <TextView
         android:id="@+id/horario"
@@ -48,7 +48,7 @@
         android:id="@+id/radioGroup"
         android:layout_width="325dp"
         android:layout_height="48dp"
-        android:layout_below="@id/salvarBtn"
+        android:layout_below="@id/saveBtn"
         android:layout_marginTop="12dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tipo">
 
         <RadioButton
-            android:id="@+id/cocoBtn"
+            android:id="@+id/poopBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -69,7 +69,7 @@
             android:textColor="@drawable/custom_radio_button_text_color_selector" />
 
         <RadioButton
-            android:id="@+id/xixiBtn"
+            android:id="@+id/peeBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -82,7 +82,7 @@
             android:textColor="@drawable/custom_radio_button_text_color_selector" />
 
         <RadioButton
-            android:id="@+id/ambosBtn"
+            android:id="@+id/bothBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -97,7 +97,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/salvarBtn"
+        android:id="@+id/saveBtn"
         android:layout_width="294dp"
         android:layout_height="51dp"
         android:layout_below="@id/radioGroup"

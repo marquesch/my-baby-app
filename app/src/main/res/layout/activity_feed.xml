@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MamaActivity">
+    tools:context=".FeedActivity">
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toBottomOf="@+id/timePicker">
 
         <RadioButton
-            android:id="@+id/seioBtn"
+            android:id="@+id/breastBtn"
             android:layout_width="123dp"
             android:layout_height="34dp"
             android:layout_marginHorizontal="5dp"
@@ -33,7 +33,7 @@
 
 
         <RadioButton
-            android:id="@+id/mamadeiraBtn"
+            android:id="@+id/bottleBtn"
             android:layout_width="123dp"
             android:layout_height="34dp"
             android:layout_marginHorizontal="5dp"
@@ -61,7 +61,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/mamandeiraNumberLayout"
+        android:id="@+id/bottleNumberLayout"
         android:layout_width="150dp"
         android:layout_height="79dp"
         android:layout_marginTop="16dp"
@@ -103,7 +103,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/seioNumberLayout"
+        android:id="@+id/breastNumberLayout"
         android:layout_width="133dp"
         android:layout_height="75dp"
         android:layout_marginTop="16dp"
@@ -139,7 +139,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/salvarBtn"
+        android:id="@+id/saveBtn"
         android:layout_width="294dp"
         android:layout_height="51dp"
         android:layout_below="@id/radioGroup"

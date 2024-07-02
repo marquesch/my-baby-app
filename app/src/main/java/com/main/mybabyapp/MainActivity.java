@@ -33,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.mama) {
-                    openMamaActivity();
+                    openFeedActivity();
                     return true;
                 } else if (itemId == R.id.fralda) {
-                    openFraldaActivity();
+                    openDiaperActivity();
                     return true;
                 }
                 return false;
@@ -50,13 +50,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void openMamaActivity() {
-        Intent intent = new Intent(MainActivity.this, MamaActivity.class);
+    private void openFeedActivity() {
+        Intent intent = new Intent(MainActivity.this, FeedActivity.class);
         startActivity(intent);
     }
 
-    private void openFraldaActivity() {
-        Intent intent = new Intent(MainActivity.this, FraldaActivity.class);
+    private void openDiaperActivity() {
+        Intent intent = new Intent(MainActivity.this, DiaperActivity.class);
         startActivity(intent);
     }
 
