@@ -9,6 +9,7 @@ import com.main.mybabyapp.data.model.BottleFeed;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class BottleFeedDao {
@@ -17,6 +18,17 @@ public class BottleFeedDao {
 
     public BottleFeedDao(SQLiteDatabase db) {
         this.db = db;
+    }
+
+    public boolean isToday(Date date) {
+        Date todayAtMidnight = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(todayAtMidnight);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        todayAtMidnight = calendar.getTime();
+        return date.getTime() >= todayAtMidnight.getTime();
     }
 
     public long insertBottleFeed(int quantity, Date time) {
@@ -67,6 +79,31 @@ public class BottleFeedDao {
                             dateFormat.parse(cursor.getString(cursor.getColumnIndexOrThrow("time")))
                     );
                     bottleFeeds.add(bottleFeed);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return bottleFeeds;
+    }
+
+    public ArrayList<BottleFeed> getDayBottleFeeds() {
+        ArrayList<BottleFeed> bottleFeeds = new ArrayList<>();
+        Cursor cursor = db.query("bottle_feed", null, null, null, null, null, "time DESC");
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                try {
+                    BottleFeed bottleFeed = new BottleFeed(
+                            cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                            cursor.getInt(cursor.getColumnIndexOrThrow("quantity")),
+                            dateFormat.parse(cursor.getString(cursor.getColumnIndexOrThrow("time")))
+                    );
+                    if (isToday(bottleFeed.getTime())) {
+                        bottleFeeds.add(bottleFeed);
+                    } else {
+                        break;
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

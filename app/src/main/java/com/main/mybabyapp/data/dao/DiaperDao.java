@@ -8,7 +8,9 @@ import com.main.mybabyapp.data.model.Diaper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DiaperDao {
@@ -17,6 +19,17 @@ public class DiaperDao {
 
     public DiaperDao(SQLiteDatabase db) {
         this.db = db;
+    }
+
+    public boolean isToday(Date date) {
+        Date todayAtMidnight = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(todayAtMidnight);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        todayAtMidnight = calendar.getTime();
+        return date.getTime() >= todayAtMidnight.getTime();
     }
 
     public long insertDiaper(Date time, boolean pee, boolean poop) {
@@ -71,6 +84,32 @@ public class DiaperDao {
                             cursor.getInt(cursor.getColumnIndexOrThrow("poop")) == 1
                     );
                     diapers.add(diaper);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return diapers;
+    }
+
+    public ArrayList<Diaper> getDayDiapers() {
+        ArrayList<Diaper> diapers = new ArrayList<>();
+        Cursor cursor = db.query("diaper", null, null, null, null, null, "time DESC");
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                try {
+                    Diaper diaper = new Diaper(
+                            cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                            dateFormat.parse(cursor.getString(cursor.getColumnIndexOrThrow("time"))), // Convert String to Date
+                            cursor.getInt(cursor.getColumnIndexOrThrow("pee")) == 1,
+                            cursor.getInt(cursor.getColumnIndexOrThrow("poop")) == 1
+                    );
+                    if (isToday(diaper.getTime())){
+                        diapers.add(diaper);
+                    } else {
+                        break;
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

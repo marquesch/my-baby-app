@@ -1,49 +1,50 @@
-package com.main.mybabyapp;
+package com.main.mybabyapp.ui.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.main.mybabyapp.R;
 import com.main.mybabyapp.data.model.ActivityItem;
 import com.main.mybabyapp.data.model.BottleFeed;
 import com.main.mybabyapp.data.model.BreastFeed;
 import com.main.mybabyapp.data.model.Diaper;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ActivityItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ActivityItem> activityList;
+    private static final SimpleDateFormat daytimeFormat = new SimpleDateFormat("HH:mm");
     private static final int VIEW_TYPE_BREAST_FEED = 1;
     private static final int VIEW_TYPE_BOTTLE_FEED = 2;
     private static final int VIEW_TYPE_DIAPER = 3;
 
-    public void CombinedFeedAdapter(List<ActivityItem> feedList) {
-        this.activityList = feedList;
+    public ActivityItemAdapter(List<ActivityItem> activityItemList) {
+        this.activityList = activityItemList;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         switch (viewType) {
             case VIEW_TYPE_BREAST_FEED:
-                // TODO: create item_breast_feed layout
                 View breastView = inflater.inflate(R.layout.item_breast_feed, parent, false);
                 return new BreastFeedViewHolder(breastView);
             case VIEW_TYPE_BOTTLE_FEED:
-                // TODO: create item_breast_feed layout
                 View bottleView = inflater.inflate(R.layout.item_bottle_feed, parent, false);
                 return new BottleFeedViewHolder(bottleView);
             case VIEW_TYPE_DIAPER:
-                // TODO: create item_breast_feed layout
                 View diaperView = inflater.inflate(R.layout.item_diaper, parent, false);
                 return new DiaperViewHolder(diaperView);
             default:
@@ -89,42 +90,55 @@ public class ActivityItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private static class BreastFeedViewHolder extends RecyclerView.ViewHolder {
-        private TextView textDate;
+        private TextView breastFeedLength, breastFeedTime;
 
         BreastFeedViewHolder(View itemView) {
             super(itemView);
-            // TODO: Create textDate view
-            textDate = itemView.findViewById(R.id.textDate);
+            breastFeedLength = itemView.findViewById(R.id.breastFeedLength);
+            breastFeedTime = itemView.findViewById(R.id.breastFeedTime);
         }
 
         void bind(BreastFeed breastFeed) {
-            // TODO: Bind breast feed data
+            String formattedBreastFeedTime = daytimeFormat.format(breastFeed.getTime());
+            breastFeedTime.setText(formattedBreastFeedTime);
+            breastFeedLength.setText(String.valueOf(breastFeed.getLength()));
         }
     }
 
     private static class BottleFeedViewHolder extends RecyclerView.ViewHolder {
-        private TextView textDate;
+        private TextView bottleFeedQuantity, bottleFeedTime;
 
         BottleFeedViewHolder(View itemView) {
             super(itemView);
-            textDate = itemView.findViewById(R.id.textDate);
+            bottleFeedQuantity = itemView.findViewById(R.id.bottleFeedQuantity);
+            bottleFeedTime = itemView.findViewById(R.id.bottleFeedTime);
         }
 
         void bind(BottleFeed bottleFeed) {
-            // TODO: Bind bottle feed data
+            bottleFeedQuantity.setText(String.valueOf(bottleFeed.getQuantity()));
+            bottleFeedTime.setText(daytimeFormat.format(bottleFeed.getTime()));
         }
     }
 
     private static class DiaperViewHolder extends RecyclerView.ViewHolder {
-        private TextView textDate;
+        private TextView diaperTime;
+        private ImageView peeImage, poopImage;
 
         DiaperViewHolder(View itemView) {
             super(itemView);
-            textDate = itemView.findViewById(R.id.textDate);
+            diaperTime = itemView.findViewById(R.id.diaperTime);
+            peeImage = itemView.findViewById(R.id.peeImage);
+            poopImage = itemView.findViewById(R.id.poopImage);
         }
 
         void bind(Diaper diaper) {
-            // TODO: Bind diaper data
+            diaperTime.setText(daytimeFormat.format(diaper.getTime()));
+            if (diaper.getPee()) {
+                peeImage.setVisibility(View.VISIBLE);
+            }
+            if (diaper.getPoop()) {
+                poopImage.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

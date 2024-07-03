@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class BreastFeedDao {
@@ -18,6 +19,17 @@ public class BreastFeedDao {
 
     public BreastFeedDao(SQLiteDatabase db) {
         this.db = db;
+    }
+
+    public boolean isToday(Date date) {
+        Date todayAtMidnight = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(todayAtMidnight);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        todayAtMidnight = calendar.getTime();
+        return date.getTime() >= todayAtMidnight.getTime();
     }
 
     public long insertBreastFeed(Date time, int length) {
@@ -68,6 +80,31 @@ public class BreastFeedDao {
                             dateFormat.parse(cursor.getString(cursor.getColumnIndexOrThrow("time")))
                     );
                     breastFeeds.add(breastFeed);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return breastFeeds;
+    }
+
+    public ArrayList<BreastFeed> getDayBreastFeeds() {
+        ArrayList<BreastFeed> breastFeeds = new ArrayList<>();
+        Cursor cursor = db.query("breast_feed", null, null, null, null, null, "time DESC");
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                try {
+                    BreastFeed breastFeed = new BreastFeed(
+                            cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                            cursor.getInt(cursor.getColumnIndexOrThrow("length")),
+                            dateFormat.parse(cursor.getString(cursor.getColumnIndexOrThrow("time")))
+                    );
+                    if (isToday(breastFeed.getTime())) {
+                        breastFeeds.add(breastFeed);
+                    } else {
+                        break;
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

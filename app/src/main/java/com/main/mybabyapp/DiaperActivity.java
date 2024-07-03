@@ -3,6 +3,7 @@ package com.main.mybabyapp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -55,8 +56,8 @@ public class DiaperActivity extends AppCompatActivity {
                 }
 
                 if (!selectedOption.isEmpty()) {
-                    boolean pee = selectedOption.contains("Pee") || selectedOption.contains("Both");
-                    boolean poop = selectedOption.contains("Poop") || selectedOption.contains("Both");
+                    boolean pee = selectedOption.contains("Xixi") || selectedOption.contains("Ambos");
+                    boolean poop = selectedOption.contains("Cocô") || selectedOption.contains("Ambos");
 
                     Calendar calendar = Calendar.getInstance();
                     calendar.set(Calendar.HOUR_OF_DAY, timePicker.getHour());

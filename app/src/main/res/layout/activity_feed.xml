@@ -48,15 +48,14 @@
 
     <TimePicker
         android:id="@+id/timePicker"
-        android:layout_width="280dp"
-        android:layout_height="360dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/radioGroup"
-        android:headerBackground="@color/purple_200"
-        android:numbersBackgroundColor="#E0DFDF"
-        android:numbersSelectorColor="@color/purple_200"
-        android:numbersTextColor="#191818"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
